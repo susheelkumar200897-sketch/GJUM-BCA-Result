@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BCA Result Verification</title>
 
 <style>
@@ -9,17 +8,15 @@ body{
     margin:0;
     font-family: Arial, Helvetica, sans-serif;
     background: url("bj.jpg") no-repeat center center/cover;
-    min-height:100vh;
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:20px;
 }
 
 .card{
-    width:90%;
-    max-width:450px;
-    padding:30px;
+    width:450px;
+    padding:40px;
     border-radius:25px;
     background: rgba(44, 62, 80, 0.90);
     color:white;
@@ -98,18 +95,6 @@ input{
 .btn:hover{
     background:#e68900;
 }
-
-/* ✅ Mobile Fix */
-@media (max-width:600px){
-
-.btn-box{
-    flex-direction:column;
-}
-
-.btn{
-    width:100%;
-}
-}
 </style>
 </head>
 
@@ -122,7 +107,7 @@ input{
 
 <div class="form-group">
     <label>Roll Number :</label>
-    <input type="text" id="roll" placeholder="Enter Roll No. - 2507211080001 - 2507211080030">
+    <input type="text" id="roll" placeholder="Enter Roll No. -  2507211080001 - 2507211080028">
     <div id="rollError" class="error"></div>
 </div>
 
@@ -193,18 +178,19 @@ function getResult(){
         valid = false;
     }
     else if(!roll.startsWith("250721108") || roll.length !== 13){
+    document.getElementById("rollError").innerHTML=
+    "Roll Number must be between 2507211080001 to 2507211080030";
+    valid = false;
+}
+else{
+    let lastFour = parseInt(roll.slice(-4));
+
+    if(lastFour < 1 || lastFour > 30){
         document.getElementById("rollError").innerHTML=
         "Roll Number must be between 2507211080001 to 2507211080030";
         valid = false;
     }
-    else{
-        let lastFour = parseInt(roll.slice(-4));
-        if(lastFour < 1 || lastFour > 30){
-            document.getElementById("rollError").innerHTML=
-            "Roll Number must be between 2507211080001 to 2507211080030";
-            valid = false;
-        }
-    }
+}
 
     if(captcha === ""){
         document.getElementById("captchaError").innerHTML="Please Enter Answer";
@@ -241,4 +227,4 @@ function resetForm(){
 </script>
 
 </body>
-</html>
+</html> 

@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BCA Result</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -12,16 +11,13 @@ body{
 font-family: Arial;
 margin:0;
 background: linear-gradient(to right,#1e3c72,#2a5298);
-padding:20px;
 }
 
-/* ✅ Responsive Box */
 .box{
-width:95%;
-max-width:900px;
-margin:30px auto;
+width:900px;
+margin:50px auto;
 background:white;
-padding:30px;
+padding:40px;
 box-shadow:0 0 25px rgba(0,0,0,0.3);
 border-radius:10px;
 }
@@ -59,16 +55,10 @@ font-weight:bold;
 color:#002147;
 }
 
-/* ✅ Table Responsive */
-.table-wrapper{
-overflow-x:auto;
-}
-
 table{
 border-collapse:collapse;
 width:100%;
 margin-top:15px;
-min-width:600px;
 }
 
 th,td{
@@ -101,28 +91,6 @@ border-radius:5px;
 background:#004080;
 }
 
-/* ✅ Mobile Fix */
-@media (max-width:600px){
-
-.college{
-font-size:22px;
-}
-
-.semester{
-font-size:16px;
-}
-
-.student-info{
-font-size:16px;
-}
-
-.btn{
-width:100%;
-margin:10px 0;
-}
-}
-
-/* Print */
 @media print{
 .btn{
 display:none;
@@ -140,7 +108,7 @@ background:white;
 <div class="box">
 
 <center>
-<img src="logo.jpeg" class="logo">
+<img src="logo.png" class="logo">
 <h2 class="college">Dharamveer Institute of Technology & Education</h2>
 <div class="semester">BCA Ist Semester Examination Result 2025-26</div>
 </center>
@@ -156,6 +124,7 @@ background:white;
 
 <script>
 
+// Default Roll For Testing
 let roll = localStorage.getItem("rollNo");
 
 if(!roll){
@@ -164,6 +133,8 @@ if(!roll){
 } else {
     roll = roll.trim();
 }
+
+// ================= 30 STUDENTS DATA =================
 
 let students = {
 
@@ -202,6 +173,8 @@ let students = {
 
 };
 
+// ================= RESULT LOGIC =================
+
 if(students[roll]){
 
 let s = students[roll];
@@ -222,7 +195,6 @@ Student Name: <span>${s.name}</span><br>
 Roll Number: <span>${roll}</span>
 </div>
 
-<div class="table-wrapper">
 <table>
 <tr>
 <th>Subject</th>
@@ -255,7 +227,6 @@ ${status}
 </tr>
 
 </table>
-</div>
 `;
 
 }else{
@@ -265,4 +236,4 @@ document.getElementById("result").innerHTML="<h3 style='color:red;text-align:cen
 </script>
 
 </body>
-</html>
+</html> 
