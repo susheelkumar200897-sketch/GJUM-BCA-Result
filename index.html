@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GJUM - Examination Results</title>
-google-site-verification: google196383a6977ea220.html
+
+<meta name="google-site-verification" content="google196383a6977ea220" />
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@500&display=swap" rel="stylesheet">
 
@@ -27,6 +29,7 @@ body{
     display:flex;
     align-items:center;
     justify-content:space-between;
+    flex-wrap:wrap;
     border-bottom:4px solid #c8a951;
 }
 
@@ -80,8 +83,9 @@ body{
 /* ===== Main Section ===== */
 
 .main{
-    width:600px;
-    margin:60px auto;
+    width:90%;
+    max-width:600px;
+    margin:40px auto;
 }
 
 .title{
@@ -139,6 +143,48 @@ body{
     color:#eb7f05;
     border-top:1px solid #ccc;
     background:white;
+}
+@media (max-width:768px){
+
+.header{
+    
+    
+    flex-direction:column;
+    text-align:center;
+    padding:15px;
+}
+
+.header-left{
+    flex-direction:column;
+}
+
+.logo{
+    width:70px;
+    margin:10px 0;
+}
+
+.university-name{
+    font-size:24px;
+}
+
+.g20-logo,
+.up-logo{
+    width:60px;
+    margin:10px 5px;
+}
+
+.form-row{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.form-row label{
+    width:100%;
+    margin-bottom:5px;
+}
+.view-btn{
+    width:100%;
+}
 }
 
 </style>
