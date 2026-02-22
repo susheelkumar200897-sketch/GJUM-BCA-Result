@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BCA Result Verification</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: url("bj.jpg") no-repeat center center/cover;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    width:450px;
+    padding:40px;
+    border-radius:25px;
+    background: rgba(44, 62, 80, 0.90);
+    color:white;
+    box-shadow:0 0 25px rgba(0,0,0,0.5);
+}
+
+hr{
+    border:0.5px solid rgba(255,255,255,0.3);
+    margin:15px 0 30px;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:none;
+    font-size:15px;
+}
+
+.error{
+    color:#ff4d4d;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.success{
+    color:#00ff99;
+    font-size:14px;
+    margin-top:10px;
+    text-align:center;
+}
+
+.loader{
+    border:4px solid #f3f3f3;
+    border-top:4px solid #ff9800;
+    border-radius:50%;
+    width:25px;
+    height:25px;
+    animation: spin 1s linear infinite;
+    margin:15px auto;
+    display:none;
+}
+
+@keyframes spin{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
+
+.btn-box{
+    margin-top:25px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+.btn{
+    padding:10px 25px;
+    background:#ff9800;
+    border:none;
+    border-radius:8px;
+    font-size:15px;
+    cursor:pointer;
+    color:white;
+    min-width:130px;
+}
+
+.btn:hover{
+    background:#e68900;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="mainCard">
+
+<h2 id="heading"></h2>
+<hr>
+
+<div class="form-group">
+    <label>Roll Number :</label>
+    <input type="text" id="roll" placeholder="Enter Roll No. -  2507211080001 - 2507211080028">
+    <div id="rollError" class="error"></div>
+</div>
+
+<div class="form-group">
+    <label id="question"></label>
+    <input type="text" id="captcha" placeholder="Enter Answer">
+    <div id="captchaError" class="error"></div>
+</div>
+
+<div class="loader" id="loader"></div>
+<div id="successMsg" class="success"></div>
+
+<div class="btn-box">
+    <button class="btn" onclick="getResult()">Get Result</button>
+    <button class="btn" onclick="resetForm()">Reset</button>
+</div>
+
+</div>
+
+<script>
+
+// ===== Check Course =====
+let course = localStorage.getItem("selectedCourse");
+let semester = localStorage.getItem("selectedSemester");
+
+if(course !== "BCA"){
+    document.getElementById("mainCard").innerHTML =
+    "<h2 style='color:red;text-align:center;'>Result Not Available For This Course</h2>";
+}
+else{
+    document.getElementById("heading").innerHTML =
+    "BCA " + (semester ? semester : "") + " Examination 2025-2026";
+}
+
+// ===== Generate Captcha =====
+let num1, num2, correctAnswer;
+
+function generateCaptcha(){
+    num1 = Math.floor(Math.random()*50)+1;
+    num2 = Math.floor(Math.random()*50)+1;
+    correctAnswer = num1 + num2;
+    document.getElementById("question").innerHTML = num1 + " + " + num2 + " = ?";
+}
+
+generateCaptcha();
+
+// ===== Enter Key Submit =====
+document.addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        getResult();
+    }
+});
+
+function getResult(){
+
+    let roll = document.getElementById("roll").value.trim();
+    let captcha = document.getElementById("captcha").value.trim();
+
+    document.getElementById("rollError").innerHTML="";
+    document.getElementById("captchaError").innerHTML="";
+    document.getElementById("successMsg").innerHTML="";
+    document.getElementById("loader").style.display="none";
+
+    let valid = true;
+
+    if(roll === ""){
+        document.getElementById("rollError").innerHTML="Please Enter Roll Number";
+        valid = false;
+    }
+    else if(!roll.startsWith("250721108") || roll.length !== 13){
+    document.getElementById("rollError").innerHTML=
+    "Roll Number must be between 2507211080001 to 2507211080030";
+    valid = false;
+}
+else{
+    let lastFour = parseInt(roll.slice(-4));
+
+    if(lastFour < 1 || lastFour > 30){
+        document.getElementById("rollError").innerHTML=
+        "Roll Number must be between 2507211080001 to 2507211080030";
+        valid = false;
+    }
+}
+
+    if(captcha === ""){
+        document.getElementById("captchaError").innerHTML="Please Enter Answer";
+        valid = false;
+    }
+    else if(parseInt(captcha) !== correctAnswer){
+        document.getElementById("captchaError").innerHTML="Wrong Answer";
+        valid = false;
+    }
+
+    if(valid){
+
+        document.getElementById("successMsg").innerHTML="Verification Successful...";
+        document.getElementById("loader").style.display="block";
+
+        localStorage.setItem("rollNo", roll);
+
+        setTimeout(function(){
+            window.location.href="result.html";
+        },1000);
+    }
+}
+
+function resetForm(){
+    document.getElementById("roll").value="";
+    document.getElementById("captcha").value="";
+    document.getElementById("rollError").innerHTML="";
+    document.getElementById("captchaError").innerHTML="";
+    document.getElementById("successMsg").innerHTML="";
+    document.getElementById("loader").style.display="none";
+    generateCaptcha();
+}
+
+</script>
+
+</body>
+</html>

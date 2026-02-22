@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BCA Result</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+font-family: Arial;
+margin:0;
+background: linear-gradient(to right,#1e3c72,#2a5298);
+}
+
+.box{
+width:900px;
+margin:50px auto;
+background:white;
+padding:40px;
+box-shadow:0 0 25px rgba(0,0,0,0.3);
+border-radius:10px;
+}
+
+.logo{
+width:100px;
+margin-bottom:10px;
+}
+
+.college{
+font-family: 'Playfair Display', serif;
+font-size:30px;
+color:#002147;
+letter-spacing:1px;
+margin-bottom:5px;
+}
+
+.semester{
+font-size:20px;
+font-weight:bold;
+color:#444;
+margin-bottom:20px;
+}
+
+.student-info{
+background:#f4f6f9;
+padding:15px;
+margin:20px 0;
+border-left:5px solid #002147;
+font-size:18px;
+}
+
+.student-info span{
+font-weight:bold;
+color:#002147;
+}
+
+table{
+border-collapse:collapse;
+width:100%;
+margin-top:15px;
+}
+
+th,td{
+border:1px solid #333;
+padding:10px;
+text-align:center;
+}
+
+th{
+background:#002147;
+color:white;
+}
+
+tr:nth-child(even){
+background:#f2f2f2;
+}
+
+.btn{
+padding:10px 25px;
+margin:15px 10px;
+border:none;
+background:#d19d25f7;
+color:white;
+cursor:pointer;
+font-size:15px;
+border-radius:5px;
+}
+
+.btn:hover{
+background:#004080;
+}
+
+@media print{
+.btn{
+display:none;
+}
+body{
+background:white;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<center>
+<img src="logo.jpeg" class="logo">
+<h2 class="college">Dharamveer Institute of Technology & Education</h2>
+<div class="semester">BCA Ist Semester Examination Result 2025-26</div>
+</center>
+
+<div id="result"></div>
+
+<center>
+<button class="btn" onclick="window.print()">Print</button>
+<button class="btn" onclick="window.print()">Download PDF</button>
+</center>
+
+</div>
+
+<script>
+
+// Default Roll For Testing
+let roll = localStorage.getItem("rollNo");
+
+if(!roll){
+    alert("No Roll Number Found! Please Enter Roll First.");
+    window.location.href = "index.html"; 
+} else {
+    roll = roll.trim();
+}
+
+// ================= 30 STUDENTS DATA =================
+
+let students = {
+
+"2507211080001":{name:"Susheel Kumar",cT:67,mathT:69,cfT:68,engT:66,mgmtT:70},
+"2507211080002":{name:"Amit Kumar",cT:58,mathT:62,cfT:60,engT:55,mgmtT:63},
+"2507211080003":{name:"Rahul Sharma",cT:71,mathT:65,cfT:72,engT:68,mgmtT:74},
+"2507211080004":{name:"Deepak Verma",cT:45,mathT:50,cfT:48,engT:52,mgmtT:47},
+"2507211080005":{name:"Rohit Kumar",cT:39,mathT:41,cfT:37,engT:40,mgmtT:43},
+"2507211080006":{name:"Ankit Yadav",cT:64,mathT:67,cfT:62,engT:61,mgmtT:65},
+"2507211080007":{name:"Vikas Singh",cT:52,mathT:55,cfT:58,engT:54,mgmtT:57},
+"2507211080008":{name:"Manish Gupta",cT:73,mathT:70,cfT:75,engT:72,mgmtT:74},
+"2507211080009":{name:"Sandeep Kumar",cT:33,mathT:35,cfT:34,engT:36,mgmtT:38},
+"2507211080010":{name:"Pawan Kumar",cT:60,mathT:59,cfT:61,engT:58,mgmtT:62},
+
+"2507211080011":{name:"Nitin Sharma",cT:48,mathT:46,cfT:49,engT:50,mgmtT:47},
+"2507211080012":{name:"Ajay Kumar",cT:69,mathT:72,cfT:68,engT:70,mgmtT:71},
+"2507211080013":{name:"Mohit Verma",cT:41,mathT:44,cfT:43,engT:42,mgmtT:45},
+"2507211080014":{name:"Tarun Singh",cT:55,mathT:57,cfT:59,engT:53,mgmtT:56},
+"2507211080015":{name:"Kunal Sharma",cT:66,mathT:63,cfT:65,engT:64,mgmtT:67},
+"2507211080016":{name:"Arjun Mehta",cT:74,mathT:73,cfT:71,engT:72,mgmtT:75},
+"2507211080017":{name:"Sachin Kumar",cT:38,mathT:40,cfT:36,engT:39,mgmtT:42},
+"2507211080018":{name:"Ravi Kumar",cT:57,mathT:60,cfT:58,engT:59,mgmtT:61},
+"2507211080019":{name:"Yogesh Yadav",cT:62,mathT:64,cfT:63,engT:65,mgmtT:66},
+"2507211080020":{name:"Lokesh Sharma",cT:49,mathT:51,cfT:50,engT:48,mgmtT:52},
+
+"2507211080021":{name:"Abhishek Singh",cT:70,mathT:68,cfT:69,engT:71,mgmtT:72},
+"2507211080022":{name:"Gaurav Kumar",cT:53,mathT:54,cfT:56,engT:55,mgmtT:57},
+"2507211080023":{name:"Harsh Verma",cT:44,mathT:46,cfT:45,engT:47,mgmtT:48},
+"2507211080024":{name:"Sumit Kumar",cT:63,mathT:61,cfT:64,engT:62,mgmtT:65},
+"2507211080025":{name:"Prashant Yadav",cT:59,mathT:58,cfT:60,engT:57,mgmtT:61},
+"2507211080026":{name:"Vivek Sharma",cT:75,mathT:74,cfT:73,engT:72,mgmtT:75},
+"2507211080027":{name:"Susheel Kumar",cT:36,mathT:38,cfT:37,engT:39,mgmtT:40},
+"2507211080028":{name:"Shubham Singh",cT:68,mathT:66,cfT:67,engT:69,mgmtT:70},
+"2507211080029":{name:"Aakash Verma",cT:47,mathT:49,cfT:48,engT:50,mgmtT:51},
+"2507211080030":{name:"Kapil Yadav",cT:54,mathT:56,cfT:55,engT:57,mgmtT:58}
+
+};
+
+// ================= RESULT LOGIC =================
+
+if(students[roll]){
+
+let s = students[roll];
+
+let total =
+(s.cT+25)+(s.mathT+25)+(s.cfT+25)+(s.engT+25)+(s.mgmtT+25);
+
+let percent = (total/500*100).toFixed(2);
+
+let status =
+(s.cT>=33 && s.mathT>=33 && s.cfT>=33 && s.engT>=33 && s.mgmtT>=33)
+? "PASS" : "FAIL";
+
+document.getElementById("result").innerHTML=`
+
+<div class="student-info">
+Student Name: <span>${s.name}</span><br>
+Roll Number: <span>${roll}</span>
+</div>
+
+<table>
+<tr>
+<th>Subject</th>
+<th>Theory (75)</th>
+<th>Practical (25)</th>
+<th>Total</th>
+</tr>
+
+<tr><td>Programming in C</td><td>${s.cT}</td><td>25</td><td>${s.cT+25}</td></tr>
+<tr><td>Mathematics</td><td>${s.mathT}</td><td>25</td><td>${s.mathT+25}</td></tr>
+<tr><td>Computer Fundamentals</td><td>${s.cfT}</td><td>25</td><td>${s.cfT+25}</td></tr>
+<tr><td>Communication English</td><td>${s.engT}</td><td>25</td><td>${s.engT+25}</td></tr>
+<tr><td>Management</td><td>${s.mgmtT}</td><td>25</td><td>${s.mgmtT+25}</td></tr>
+
+<tr>
+<td><b>Grand Total</b></td>
+<td colspan="3"><b>${total} / 500</b></td>
+</tr>
+
+<tr>
+<td><b>Percentage</b></td>
+<td colspan="3"><b>${percent}%</b></td>
+</tr>
+
+<tr>
+<td><b>Status</b></td>
+<td colspan="3" style="color:${status=="PASS"?"green":"red"}; font-weight:bold;">
+${status}
+</td>
+</tr>
+
+</table>
+`;
+
+}else{
+document.getElementById("result").innerHTML="<h3 style='color:red;text-align:center;'>Result Not Found</h3>";
+}
+
+</script>
+
+</body>
+</html>

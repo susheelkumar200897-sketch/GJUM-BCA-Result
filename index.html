@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GJUM - Examination Results</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Open Sans', sans-serif;
+    background:#f2f4f8;
+}
+
+/* ===== Top Blue Strip ===== */
+.top-strip{
+    background:#0b2c6b;
+    height:10px;
+}
+
+/* ===== Header Section ===== */
+.header{
+    background:#ffffff;
+    padding:20px 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:4px solid #c8a951;
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+}
+
+.logo{
+    width:100px;
+    margin-right:20px;
+}
+
+.university-name{
+    font-family:'Playfair Display', serif;
+    font-size:38px;
+    font-weight:700;
+    color:#0b2c6b;
+    margin:0;
+}
+
+.name-line{
+    height:2px;
+    background:#c8a951;
+    margin:8px 0;
+}
+
+.tagline{
+    font-size:15px;
+    color:#444;
+    font-weight:600;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+}
+
+/* 🔥 G20 Bigger */
+.g20-logo{
+    width:110px;
+    margin-left:10px;
+}
+
+/* Normal UP Logo */
+.up-logo{
+    width:75px;
+    margin-left:20px;
+}
+
+/* ===== Main Section ===== */
+
+.main{
+    width:600px;
+    margin:60px auto;
+}
+
+.title{
+    text-align:center;
+    font-size:26px;
+    font-weight:600;
+    color:#1a40c4;
+    margin-bottom:40px;
+}
+
+.form-row{
+    display:flex;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.form-row label{
+    width:200px;
+    font-size:16px;
+    color:#444444;
+}
+
+.form-row select{
+    flex:1;
+    padding:10px;
+    font-size:15px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+/* ===== Button ===== */
+
+.view-btn{
+    margin-top:40px;
+    background:#ff9800;
+    color:white;
+    border:none;
+    padding:10px 30px;
+    font-size:16px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.view-btn:disabled{
+    background:#ccc;
+}
+
+/* ===== Footer ===== */
+
+.footer{
+    text-align:center;
+    padding:15px;
+    margin-top:80px;
+    font-size:13px;
+    color:#eb7f05;
+    border-top:1px solid #ccc;
+    background:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="top-strip"></div>
+
+<div class="header">
+
+    <div class="header-left">
+        <img src="download.jpeg" class="logo">
+        <div>
+            <h1 class="university-name">
+                Guru Jambheshwar University Moradabad
+            </h1>
+            <div class="name-line"></div>
+            <div class="tagline">
+                A State (Public) University - Government of Uttar Pradesh, India
+            </div>
+        </div>
+    </div>
+
+    <div class="header-right">
+        <img src="download.png" class="g20-logo">
+        <img src="download1.png" class="up-logo">
+    </div>
+
+</div>
+
+<div class="main">
+
+<div class="title">
+GJUM - Examination Results
+</div>
+
+<div class="form-row">
+<label>Result Type</label>
+<select>
+<option>Main Result</option>
+<option>Re-Evaluation Result</option>
+</select>
+</div>
+
+<div class="form-row">
+<label>Academic Session</label>
+<select>
+<option>2025 - 2026</option>
+</select>
+</div>
+
+<div class="form-row">
+<label>Select Degree Type</label>
+<select id="semester" onchange="checkForm()">
+<option value="">--Select--</option>
+<option value="Semester">SEMESTER</option>
+<option value="Yearly">YEARLY</option>
+</select>
+</div>
+
+<div class="form-row">
+<label>Select Course</label>
+<select id="course" onchange="checkForm()">
+<option value="">--Select Course--</option>
+<option value="BCA">BCA</option>
+<option value="BBA">BBA</option>
+<option value="BA">BA</option>
+<option value="BSc">BSc</option>
+</select>
+</div>
+
+<button id="viewBtn" class="view-btn" disabled onclick="goNext()">View</button>
+
+</div>
+
+<div class="footer">
+© 2026 Guru Jambheshwar University, Moradabad | Examination Cell
+</div>
+
+<script>
+
+function checkForm(){
+    var sem=document.getElementById("semester").value;
+    var course=document.getElementById("course").value;
+
+    if(sem!=="" && course!==""){
+        document.getElementById("viewBtn").disabled=false;
+    }else{
+        document.getElementById("viewBtn").disabled=true;
+    }
+}
+
+function goNext(){
+    var course=document.getElementById("course").value;
+    localStorage.setItem("selectedCourse",course);
+    window.location.href="page2.html";
+}
+
+</script>
+
+</body>
+</html>

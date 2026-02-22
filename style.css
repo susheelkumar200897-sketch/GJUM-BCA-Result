@@ -1,0 +1,170 @@
+body.bg{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(to right,#1e3c72,#2a5298);
+}
+
+.header{
+text-align:center;
+color:white;
+padding:20px;
+}
+
+.logo{
+width:90px;
+}
+
+.box{
+width:550px;
+margin:50px auto;
+padding:40px;
+background:white;
+border-radius:20px;
+text-align:center;
+box-shadow:0 0 20px black;
+}
+
+select,input{
+width:85%;
+padding:10px;
+margin-top:10px;
+}
+
+.btn{
+padding:10px 20px;
+background:#ff9800;
+border:none;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+.btn2{
+padding:10px 20px;
+background:gray;
+border:none;
+color:white;
+border-radius:5px;
+}
+
+table{
+width:100%;
+margin-top:20px;
+border-collapse:collapse;
+}
+
+table,th,td{
+border:1px solid gray;
+padding:8px;
+}
+
+th{
+background:#f2f2f2;
+}
+
+.college{
+color:#1e3c72;
+}
+/* ================= BODY BACKGROUND ================= */
+
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: url("bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Overlay effect */
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.90);
+    z-index: -1;
+}
+
+/* ================= HEADER ================= */
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    border-bottom: 3px solid #c8a44d;
+}
+
+.header-left img {
+    width: 95px;
+}
+
+.header-center {
+    text-align: center;
+    flex: 1;
+}
+
+.header-center h1 {
+    margin: 0;
+    font-size: 40px;
+    color: #1e3c72;
+    font-weight: bold;
+}
+
+.header-center p {
+    margin: 5px 0 0;
+    font-size: 17px;
+    color: #333;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+/* 🔹 Bigger Logos */
+download.png {
+    width: 100px;
+}
+
+download1.png {
+    width: 100px;
+}
+
+/* ================= MAIN CONTENT ================= */
+
+.main-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.main-container h2 {
+    color: #1e3c72;
+    font-size: 32px;
+}
+
+/* ================= FORM BOX ================= */
+
+.form-box {
+    background: white;
+    width: 400px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+.form-box label {
+    display: block;
+    text-align: left;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.form-box select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
